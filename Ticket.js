@@ -11,10 +11,19 @@ class Ticket {
         return `${date.getDate()}.${date.getMonth()}.${date.getFullYear().toString().slice(-2)} ${date.getHours()}:${date.getMinutes()}`;
     }
 
+    static findIndex(arr, id) {
+        return arr.findIndex(item => item.id == id);
+    }
+
+    static deteleTicket(arr, id) {
+        const ticketIndex = Ticket.findIndex(arr, id);
+        arr.splice(ticketIndex, 1);
+    }
+
     static updateTicket(arr, ...params) {
         const {id, name, description} = params[0];
 
-        const ticketIndex = arr.findIndex(item => item.id == id);
+        const ticketIndex = Ticket.findIndex(arr, id);
 
         arr[ticketIndex].name = name;
 

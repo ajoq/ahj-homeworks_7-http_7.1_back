@@ -52,43 +52,39 @@ app.use(async ctx => {
             ctx.response.set('Access-Control-Allow-Origin', '*');
             return;
         case 'ticketById':
-            const { id } = ctx.request.query;
-            const result = ticketsFull.find(item => item.id == id);
-            // console.log(result);
-            ctx.response.body = result;
+            const result = ticketsFull.find(item => item.id == ctx.request.query.id);
 
+            ctx.response.body = result;
             ctx.response.status = 200;
             ctx.response.set('Access-Control-Allow-Origin', '*');
             return;
         case 'createTicket':
-            // console.log(ctx.request.body);
             const {name, description} = ctx.request.body;
-            // console.log(name);
-            // console.log(description);
-
             const ticketId = uuidv4();
 
             const newTicket =  new Ticket(ticketId, name);
-            // console.log(newTicket);
             tickets.push(newTicket);
             
             const newTicketFull =  new TicketFull(ticketId, name, description);
-            // console.log(newTicketFull);
             ticketsFull.push(newTicketFull);
 
             ctx.response.body = tickets;
-
             ctx.response.status = 200;
             ctx.response.set('Access-Control-Allow-Origin', '*');
             return;
         case 'editTicket':
-            // console.log(ctx.request.body);
-
             Ticket.updateTicket(tickets, ctx.request.body);
             Ticket.updateTicket(ticketsFull, ctx.request.body);
 
             ctx.response.body = tickets;
+            ctx.response.status = 200;
+            ctx.response.set('Access-Control-Allow-Origin', '*');
+            return;
+        case 'deleteTicket':
+            Ticket.deteleTicket(tickets, ctx.request.query.id);
+            Ticket.deteleTicket(ticketsFull, ctx.request.query.id);
 
+            ctx.response.body = tickets;
             ctx.response.status = 200;
             ctx.response.set('Access-Control-Allow-Origin', '*');
             return;
