@@ -20,6 +20,11 @@ class Ticket {
         arr.splice(ticketIndex, 1);
     }
 
+    static updateStatus(arr, id) {
+        const ticketIndex = Ticket.findIndex(arr, id);
+        arr[ticketIndex].status ? arr[ticketIndex].status = false : arr[ticketIndex].status = true;
+    }
+
     static updateTicket(arr, ...params) {
         const {id, name, description} = params[0];
 

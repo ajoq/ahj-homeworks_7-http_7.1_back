@@ -42,7 +42,6 @@ app.use((ctx, next) => {
 
 app.use(async ctx => {
     const { method } = ctx.request.query;
-    // console.log(method);
 
     switch (method) {
         case 'allTickets':
@@ -83,6 +82,14 @@ app.use(async ctx => {
         case 'deleteTicket':
             Ticket.deteleTicket(tickets, ctx.request.query.id);
             Ticket.deteleTicket(ticketsFull, ctx.request.query.id);
+
+            ctx.response.body = tickets;
+            ctx.response.status = 200;
+            ctx.response.set('Access-Control-Allow-Origin', '*');
+            return;
+        case 'updateStatus':
+            Ticket.updateStatus(tickets, ctx.request.query.id);
+            Ticket.updateStatus(ticketsFull, ctx.request.query.id);
 
             ctx.response.body = tickets;
             ctx.response.status = 200;
