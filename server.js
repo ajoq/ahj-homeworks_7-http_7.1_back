@@ -72,8 +72,8 @@ app.use(async ctx => {
             ctx.response.set('Access-Control-Allow-Origin', '*');
             return;
         case 'editTicket':
-            Ticket.updateTicket(tickets, ctx.request.body);
-            Ticket.updateTicket(ticketsFull, ctx.request.body);
+            Ticket.updateTicket(tickets, ctx.request.query.id, ctx.request.body);
+            Ticket.updateTicket(ticketsFull, ctx.request.query.id, ctx.request.body);
 
             ctx.response.body = tickets;
             ctx.response.status = 200;

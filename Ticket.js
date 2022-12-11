@@ -25,8 +25,8 @@ class Ticket {
         arr[ticketIndex].status ? arr[ticketIndex].status = false : arr[ticketIndex].status = true;
     }
 
-    static updateTicket(arr, ...params) {
-        const {id, name, description} = params[0];
+    static updateTicket(arr, id, ...params) {
+        const {name, description} = params[0];
 
         const ticketIndex = Ticket.findIndex(arr, id);
 
