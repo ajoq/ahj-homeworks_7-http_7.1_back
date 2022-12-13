@@ -1,3 +1,6 @@
+Frontend git: https://github.com/ajoq/ahj-homeworks_7-http_7.2_front
+Frontend GH pages: https://ajoq.github.io/ahj-homeworks_7-http_7.2_front/
+
 ### HelpDesk
 
 #### Легенда
