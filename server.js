@@ -24,6 +24,11 @@ const ticketFull3 = new TicketFull(3, 'Установить обновление
 ticketsFull.push(ticketFull1, ticketFull2, ticketFull3);
 //Тестовые данные
 
+function responceOk(ctx) {
+    ctx.response.status = 200;
+    ctx.response.set('Access-Control-Allow-Origin', '*');
+}
+
 app.use(koaBody({
     urlencoded: true,
     multipart: true
@@ -47,15 +52,13 @@ app.use(async ctx => {
         case 'allTickets':
             ctx.response.body = tickets;
 
-            ctx.response.status = 200;
-            ctx.response.set('Access-Control-Allow-Origin', '*');
+            responceOk(ctx);
             return;
         case 'ticketById':
             const result = ticketsFull.find(item => item.id == ctx.request.query.id);
 
             ctx.response.body = result;
-            ctx.response.status = 200;
-            ctx.response.set('Access-Control-Allow-Origin', '*');
+            responceOk(ctx);
             return;
         case 'createTicket':
             const {name, description} = ctx.request.body;
@@ -68,32 +71,28 @@ app.use(async ctx => {
             ticketsFull.push(newTicketFull);
 
             ctx.response.body = tickets;
-            ctx.response.status = 200;
-            ctx.response.set('Access-Control-Allow-Origin', '*');
+            responceOk(ctx);
             return;
         case 'editTicket':
             Ticket.updateTicket(tickets, ctx.request.query.id, ctx.request.body);
             Ticket.updateTicket(ticketsFull, ctx.request.query.id, ctx.request.body);
 
             ctx.response.body = tickets;
-            ctx.response.status = 200;
-            ctx.response.set('Access-Control-Allow-Origin', '*');
+            responceOk(ctx);
             return;
         case 'deleteTicket':
             Ticket.deteleTicket(tickets, ctx.request.query.id);
             Ticket.deteleTicket(ticketsFull, ctx.request.query.id);
 
             ctx.response.body = tickets;
-            ctx.response.status = 200;
-            ctx.response.set('Access-Control-Allow-Origin', '*');
+            responceOk(ctx);
             return;
         case 'updateStatus':
             Ticket.updateStatus(tickets, ctx.request.query.id);
             Ticket.updateStatus(ticketsFull, ctx.request.query.id);
 
             ctx.response.body = tickets;
-            ctx.response.status = 200;
-            ctx.response.set('Access-Control-Allow-Origin', '*');
+            responceOk(ctx);
             return;
         default:
             ctx.response.status = 404;

@@ -27,9 +27,7 @@ class Ticket {
 
     static updateTicket(arr, id, ...params) {
         const {name, description} = params[0];
-
         const ticketIndex = Ticket.findIndex(arr, id);
-
         arr[ticketIndex].name = name;
 
         if ('description' in arr[ticketIndex]) {
